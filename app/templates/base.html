@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta property="og:title" content="Personal Portfolio" />
+    <meta property="og:description" content="My Personal Portfolio" />
+    <meta property="og:url" content="{{ url }}" />
+    <!-- ^ Jinja2 expression: {{ }} renders a Python variable passed from the route -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- url_for('static', filename='...') generates the correct absolute path to our static folder.
+         Unlike ./static/... (relative path), url_for() works correctly from ANY route, 
+         e.g. /hobbies or /travel won't accidentally look for static files relative to that path -->
+
+    <link
+      lang="sass"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/main.css') }}"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='img/favicon.ico') }}"
+      type="image/x-icon"
+    />
+
+    <!-- {% block %} is Jinja template inheritance: child templates override this section.
+    {{ title }} is the fallback if a child doesn't define {% block title %} -->
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+  </head>
+
+  <body>
+    <header class="nav-bar">
+      <div class="nav-content">
+        <a href="/">
+          <div class="nav-logo">
+            <img src="{{ url_for('static', filename='img/logo.svg') }}" />
+          </div>
+        </a>
+
+        <!-- {% for %} is Jinja's loop syntax — nav_pages comes from the context_processor in __init__.py, which injects it into every template automatically (no need to pass it from each route individually) -->
+
+        <!-- url_for(page.endpoint) generates the URL for a named route function. -->
+
+        <!-- Jinja inline conditional (like JS ternary): adds 'active' class when the current page matches this nav item.     request.endpoint is Flask's name for the current route function -->
+
+        <nav>
+          {% for page in nav_pages %}
+          <a
+            href="{{ url_for(page.endpoint) }}"
+            class="{{ 'active' if request.endpoint == page.endpoint else '' }}"
+          >
+            {{ page.label }}
+          </a>
+          {% endfor %}
+        </nav>
+      </div>
+    </header>
+
+   <!-- Child templates inject their content here. 
+   Without {% block content %}, every page would look identical -->
+
+    {% block content %}{% endblock %}
+  </body>
+</html>

@@ -95,3 +95,23 @@ body {
     font-size: 50px;
     font-weight: 700;
 }
+
+
+/* Add navbar styling here (feel free to change) */
+
+.nav-content nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: inline-block;
+    font-family: "Roboto", serif;
+    font-weight: 700;
+}
+
+.nav-content nav a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.nav-content nav a.active {
+    border-bottom: 3px solid white;
+}
