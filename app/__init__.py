@@ -1,33 +1,35 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from dotenv import load_dotenv
+
+from app.portfolio_data import ABOUT_TEXT, EDUCATION, HOBBIES, WORK_EXPERIENCES
 
 load_dotenv()
 app = Flask(__name__)
 
-# context_processor injects variables into EVERY template automatically.
+# adds nav links to every template
 @app.context_processor
 def inject_nav():
     return dict(nav_pages=[
         {"label": "Home", "endpoint": "index"},
-        # "index" matches the function name below: def index()
-        # If we add blueprints later, this becomes "main.index" (blueprint_name.function_name)
         {"label": "Hobbies", "endpoint": "hobbies"},
         {"label": "Travel", "endpoint": "travel"},
     ])
 
-# @app.route() maps a URL path to a Python function — equivalent to app.get() in Express.
-# The function name becomes the "endpoint" name used in url_for() and context_processor above.
 @app.route('/')
 def index():
-    # render_template() finds the file in templates/, runs Jinja substitution,
-    # returns HTML. Keyword args become variables available in the template.
-    # os.getenv("URL") reads from .env via python-dotenv
-    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"))
+    return render_template(
+        'index.html',
+        title="MLH Fellow",
+        url=os.getenv("URL"),
+        about_text=ABOUT_TEXT,
+        work_experiences=WORK_EXPERIENCES,
+        education=EDUCATION,
+    )
 
 @app.route('/hobbies')
 def hobbies():
-    return render_template('hobbies.html', title="Hobbies")
+    return render_template('hobbies.html', title="Hobbies", hobbies=HOBBIES)
 
 @app.route('/travel')
 def travel():

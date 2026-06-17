@@ -1,12 +1,22 @@
 {% extends "base.html" %}
+{% from "macros/list_section.html" import render_list_section %}
 
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
 <div class="profile">
-    <div id="profile-picture" class="profile-picture">
+    <div class="profile-picture">
         <img src="{{ url_for('static', filename='img/logo.jpg') }}">
     </div>
     <h1>{{ title }}</h1>
 </div>
+
+<main class="page-content">
+    <section class="about-section">
+        <h2>About Me</h2>
+        <p>{{ about_text }}</p>
+    </section>
+    {{ render_list_section("Work Experience", work_experiences) }}
+    {{ render_list_section("Education", education) }}
+</main>
 {% endblock %}

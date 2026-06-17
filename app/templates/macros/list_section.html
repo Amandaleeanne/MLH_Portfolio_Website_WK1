@@ -1,0 +1,21 @@
+{# reusable list for work, education, hobbies #}
+{% macro render_list_section(section_title, items) %}
+<section class="list-section">
+  <h2>{{ section_title }}</h2>
+  {% for item in items %}
+  <div class="list-item">
+    {% if item.image %}
+    <img src="{{ url_for('static', filename=item.image) }}" alt="{{ item.title }}">
+    {% endif %}
+    <div>
+      <h3>{{ item.title }}</h3>
+      {% if item.subtitle %}<p class="subtitle">{{ item.subtitle }}</p>{% endif %}
+      {% if item.date %}<p class="date">{{ item.date }}</p>{% endif %}
+      {% if item.description %}<p>{{ item.description }}</p>{% endif %}
+    </div>
+  </div>
+  {% else %}
+  <p>No entries yet.</p>
+  {% endfor %}
+</section>
+{% endmacro %}

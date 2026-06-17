@@ -97,7 +97,7 @@ body {
 }
 
 
-/* Add navbar styling here (feel free to change) */
+/* navbar styling */
 
 .nav-content nav a {
     color: white;
@@ -114,4 +114,63 @@ body {
 
 .nav-content nav a.active {
     border-bottom: 3px solid white;
+}
+
+.page-content {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 24px;
+}
+
+.about-section,
+.list-section {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.about-section h2,
+.list-section h2 {
+    color: #1d539f;
+    margin-top: 0;
+}
+
+.list-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.list-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.list-item img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.list-item h3 {
+    margin: 0 0 8px;
+}
+
+.list-item .subtitle {
+    margin: 0 0 4px;
+    font-weight: 500;
+}
+
+.list-item .date {
+    margin: 0 0 8px;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.list-item p {
+    margin: 0;
+    line-height: 1.5;
 }

@@ -1,8 +1,10 @@
 {% extends "base.html" %}
+{% from "macros/list_section.html" import render_list_section %}
 
 {% block title %}Hobbies{% endblock %}
 
 {% block content %}
-<h1>Hobbies</h1>
-<p>Add text here</p>
+<main class="page-content">
+    {{ render_list_section("Hobbies", hobbies) }}
+</main>
 {% endblock %}
