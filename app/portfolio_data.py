@@ -32,6 +32,24 @@ EDUCATION = [
     },
 ]
 
+PERSONAL_PROJECTS = [
+    {
+        "title": "Example 1",
+        "description": "Example description",
+        "link": "https://example.com",
+        "image": "img/logo.jpg",
+    },
+
+]
+
+SKILLS = [
+    "Python",
+    "Java", 
+    "C", 
+    "HTML / CSS / JavaScript", 
+    "Databases / SQL", "Git & Collaboration", 
+    "Flutter / Dart", "Curiosity"]
+
 HOBBIES = [
     {
         "title": "Photography",

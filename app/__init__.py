@@ -3,7 +3,7 @@ import markdown
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
 
-from app.portfolio_data import ABOUT_TEXT, EDUCATION, HOBBIES, WORK_EXPERIENCES
+from app.portfolio_data import *
 
 load_dotenv()
 app = Flask(__name__)
@@ -26,9 +26,10 @@ def index():
         'index.html',
         title="Amandaleeanne Schock",
         url=os.getenv("URL"),
-        about_text=ABOUT_TEXT,
         work_experiences=WORK_EXPERIENCES,
         education=EDUCATION,
+        skills=SKILLS,
+        personal_projects=PERSONAL_PROJECTS,
     )
 
 @app.route('/hobbies')
@@ -42,4 +43,9 @@ def travel():
 
 @app.route('/experience')
 def work():
-    return render_template('work.html', title="Experience")
+    return render_template(
+        'work.html',
+        title="Experience",
+        work_experiences=WORK_EXPERIENCES,
+        education=EDUCATION,
+    )

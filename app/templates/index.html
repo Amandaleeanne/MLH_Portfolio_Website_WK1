@@ -24,28 +24,21 @@
     <section class="skills">
         <h2>Skills</h2>
         <ul class="skills-list">
-            <li>Python</li>
-            <li>Java</li>
-            <li>C</li>
-            <li>HTML / CSS / JavaScript</li>
-            <li>Databases / SQL</li>
-            <li>Git &amp; Collaboration</li>
-            <li>Flutter / Dart</li>
-            <li>Curiosity</li>
+            {% for skill in skills %}
+            <li>{{ skill }}</li>
+            {% endfor %}
         </ul>
     </section>
 
     <section class="projects">
         <h2>Selected Projects</h2>
         <div class="project-cards">
+            {% for item in personal_projects %}
             <article class="card">
-                <h3>Example 1</h3>
-                <p>Example project description.</p>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description }}</p>
             </article>
-            <article class="card">
-                <h3>Example 2</h3>
-                <p>Example project description.</p>
-            </article>
+            {% endfor %}
         </div>
     </section>
 
@@ -68,19 +61,4 @@
 
 </main>
 
-{% endblock %}
-    <div class="profile-picture">
-        <img src="{{ url_for('static', filename='img/logo.jpg') }}">
-    </div>
-    <h1>{{ title }}</h1>
-</div>
-
-<main class="page-content">
-    <section class="about-section">
-        <h2>About Me</h2>
-        <p>{{ about_text }}</p>
-    </section>
-    {{ render_list_section("Work Experience", work_experiences) }}
-    {{ render_list_section("Education", education) }}
-</main>
 {% endblock %}

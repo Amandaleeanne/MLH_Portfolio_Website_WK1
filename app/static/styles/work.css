@@ -1,0 +1,87 @@
+/* Work and education page styles */
+.page-content {
+  max-width: 1000px;
+  margin: 0 auto 60px;
+  padding: 0 16px;
+}
+
+.page-content h1,
+.page-content h2 {
+  color: #1c539f;
+}
+
+.work-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.work-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.work-list {
+  display: grid;
+  gap: 16px;
+}
+
+.work-card,
+.education-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 22px;
+}
+
+.work-card h3,
+.education-card h3 {
+  margin-top: 0;
+}
+
+.work-card .subtitle,
+.education-card .subtitle {
+  margin: 6px 0 0;
+  color: #4a6fa1;
+}
+
+.work-card .date,
+.education-card .date {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+  color: #667992;
+}
+
+.education-scroll {
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.education-row {
+  display: inline-flex;
+  gap: 18px;
+}
+
+.education-card {
+  min-width: 280px;
+  flex: 0 0 auto;
+}
+
+.education-row::-webkit-scrollbar {
+  height: 8px;
+}
+
+.education-row::-webkit-scrollbar-thumb {
+  background: rgba(28,83,159,0.35);
+  border-radius: 999px;
+}
+
+.education-row::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.8);
+}
+
+@media (max-width: 800px) {
+  .education-row {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
