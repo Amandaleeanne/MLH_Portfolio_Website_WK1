@@ -2,7 +2,21 @@
 
 {% block title %}Travel Map{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/travel.css') }}">
+{% endblock %}
+
 {% block content %}
-<h1>Travel Map</h1>
-<p>Add map here</p>
+<main class="page-content">
+	<header class="travel-header">
+		<h1>Travel Map</h1>
+		<p>Places I've visited — hover or focus a marker for details.</p>
+	</header>
+
+	<div class="map-wrap">
+		<div class="plotly-embed">
+			{{ plot_html | safe }}
+		</div>
+	</div>
+</main>
 {% endblock %}

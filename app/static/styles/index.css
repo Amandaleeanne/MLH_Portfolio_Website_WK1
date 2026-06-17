@@ -45,6 +45,20 @@
   border-radius: 8px;
 }
 
+.card h3 {
+  margin: 0 0 12px;
+}
+
+.project-link {
+  color: #1c539f;
+  text-decoration: none;
+}
+
+.project-link:hover,
+.project-link:focus {
+  text-decoration: underline;
+}
+
 .contact a {
   color: #1c539f;
   font-weight: 700;

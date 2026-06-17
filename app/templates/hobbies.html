@@ -4,7 +4,29 @@
 {% block title %}Hobbies{% endblock %}
 
 {% block content %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/hobbies.css') }}">
+{% endblock %}
+
 <main class="page-content">
-    {{ render_list_section("Hobbies", hobbies) }}
+    <header class="hobbies-header">
+        <h1>Hobbies</h1>
+        <p>Here are some of my hobbies and interests outside of work.</p>
+    </header>
+    <div class="hobbies-grid">
+        {% for hobby in hobbies %}
+        <article class="hobby-card">
+            {% if hobby.image %}
+            <img src="{{ url_for('static', filename=hobby.image) }}" alt="{{ hobby.title }}">
+            {% endif %}
+            <div>
+                <h3>{{ hobby.title }}</h3>
+                <p>{{ hobby.description }}</p>
+            </div>
+        </article>
+        {% else %}
+        <p>No hobbies available yet.</p>
+        {% endfor %}
+    </div>
 </main>
 {% endblock %}

@@ -35,7 +35,13 @@
         <div class="project-cards">
             {% for item in personal_projects %}
             <article class="card">
-                <h3>{{ item.title }}</h3>
+                <h3>
+                    {% if item.link %}
+                    <a class="project-link" href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
+                    {% else %}
+                    {{ item.title }}
+                    {% endif %}
+                </h3>
                 <p>{{ item.description }}</p>
             </article>
             {% endfor %}

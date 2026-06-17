@@ -1,0 +1,51 @@
+/* Hobbies page styles */
+.page-content {
+  max-width: 1000px;
+  margin: 0 auto 60px;
+  padding: 0 16px;
+}
+
+.hobbies-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.hobbies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.hobby-card {
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hobby-card img {
+  width: 100%;
+  border-radius: 14px;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+.hobby-card h3 {
+  margin: 0;
+  color: #1c539f;
+}
+
+.hobby-card p {
+  margin: 0;
+  color: #4a647b;
+  line-height: 1.6;
+}
+
+@media (max-width: 620px) {
+  .hobbies-grid {
+    grid-template-columns: 1fr;
+  }
+}
