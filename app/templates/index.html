@@ -15,6 +15,12 @@
     <section class="about-section">
         <h2>About Me</h2>
         <p>{{ about_text }}</p>
+        <p class="contact">
+            <a href="mailto:{{ contact.email }}">{{ contact.email }}</a> ·
+            {{ contact.phone }} ·
+            <a href="{{ contact.website }}">k4urman.github.io</a> ·
+            <a href="{{ contact.github }}">k4urman</a>
+        </p>
     </section>
     {{ render_list_section("Work Experience", work_experiences) }}
     {{ render_list_section("Education", education) }}
