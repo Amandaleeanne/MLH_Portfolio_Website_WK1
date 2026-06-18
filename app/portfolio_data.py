@@ -74,7 +74,7 @@ EDUCATION = [
     },
 ]
 
-HOBBIES = [
+HOBBIES_ART = [
     {
         "title": "Face Collage 1",
         "description": "2005",
@@ -104,6 +104,33 @@ HOBBIES = [
         "title": "Flight of the Bumble Bee",
         "description": "2014",
         "image": "img/07-cellist-UT-to-send.jpeg",
+    },
+]
+
+
+HOBBIES_MUSIC = [
+    {
+        "title": "Furies from Fates & Furies (based on Greek goddesses)",
+        "description": "Furies: Animated music video for Furies",
+        "youtube_id": "RR5l_c2Txwg",  # replace with your actual YouTube video ID
+        # youtube_id is the part after ?v= in the YouTube URL
+        # e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ → dQw4w9WgXcQ
+    },
+    
+    {
+        "title": "Shoreline",
+        "description": "Shoreline for oboe, viola, and harp",
+        "youtube_id": "u6nfwYWK1Gk",
+    },
+    {
+        "title": "Mech Mania",
+        "description": "Mech Mania: Animated music video",
+        "youtube_id": "HdbAjjiGmJA"
+    },
+    {
+        "title": "In A Blink of An Eye",
+        "description": "Mech Mania: Animated music video",
+        "youtube_id": "EiG1VJJ3q8M"
     },
 ]
 

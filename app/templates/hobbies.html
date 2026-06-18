@@ -1,10 +1,79 @@
-{% extends "base.html" %}
-{% from "macros/list_section.html" import render_list_section %}
+{% extends "base.html" %} 
+{% from "macros/list_section.html" import render_list_section %} 
+{% block title %}{{ title }}{% endblock %} 
 
-{% block title %}Hobbies{% endblock %}
-
-{% block content %}
+{% block
+content %}
+<section class="hobbies">
+    <h1>Hobbies</h1>
+</section>
 <main class="page-content">
-    {{ render_list_section("Hobbies", hobbies) }}
+
+    
+    {{ render_list_section("Artwork", hobbies_art) }}
+    {{ render_list_section("Music", hobbies_music) }}
+
+
 </main>
+
+{# ---- Image lightbox ---- #}
+<div class="lightbox-overlay" id="image-lightbox">
+    <div class="lightbox-content">
+        <button class="lightbox-close" onclick="closeLightbox('image-lightbox')">✕</button>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+</div>
+
+{# ---- Video lightbox ---- 
+   iframe src is empty until user clicks a card — prevents video
+   playing in background after lightbox is closed #}
+<div class="lightbox-overlay" id="video-lightbox">
+    <div class="lightbox-content">
+        <button class="lightbox-close" onclick="closeLightbox('video-lightbox')">✕</button>
+        <iframe id="lightbox-iframe" src="" allowfullscreen></iframe>
+        <div style="text-align:right; margin-top:8px;">
+            <a id="youtube-link" href="" target="_blank"
+               style="color:white; font-size:14px;">
+                ▶ Watch on YouTube
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openImageLightbox(src, alt) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox-img').alt = alt;
+        document.getElementById('image-lightbox').classList.add('active');
+    }
+
+    // ?autoplay=1 starts video immediately after user clicks
+    // ?rel=0 hides YouTube related videos at the end
+    function openVideoLightbox(youtubeId, title) {
+        const embedUrl = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&rel=0';
+        const watchUrl = 'https://www.youtube.com/watch?v=' + youtubeId;
+        document.getElementById('lightbox-iframe').src = embedUrl;
+        document.getElementById('youtube-link').href = watchUrl;
+        document.getElementById('youtube-link').textContent = '▶ Watch "' + title + '" on YouTube';
+        document.getElementById('video-lightbox').classList.add('active');
+    }
+
+    function closeLightbox(id) {
+        document.getElementById(id).classList.remove('active');
+        // Clear iframe src on close — stops audio playing in background
+        if (id === 'video-lightbox') {
+            document.getElementById('lightbox-iframe').src = '';
+        }
+    }
+
+    // Clicking dark overlay outside content also closes lightbox
+    document.getElementById('image-lightbox').addEventListener('click', function(e) {
+        if (e.target === this) closeLightbox('image-lightbox');
+    });
+
+    document.getElementById('video-lightbox').addEventListener('click', function(e) {
+        if (e.target === this) closeLightbox('video-lightbox');
+    });
+</script>
+
 {% endblock %}
