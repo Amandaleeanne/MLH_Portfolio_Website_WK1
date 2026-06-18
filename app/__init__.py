@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template
 from dotenv import load_dotenv
 
-from app.portfolio_data import ABOUT_TEXT, CONTACT, EDUCATION, HOBBIES, WORK_EXPERIENCES
+from app.portfolio_data import ABOUT_TEXT, EDUCATION, HOBBIES, WORK_EXPERIENCES
 
 load_dotenv()
 app = Flask(__name__)
@@ -23,10 +23,9 @@ def inject_nav():
 def index():
     return render_template(
         'index.html',
-        title="Maninder (Kaurman) Kaur",
+        title="MLH Fellow",
         url=os.getenv("URL"),
         about_text=ABOUT_TEXT,
-        contact=CONTACT,
         work_experiences=WORK_EXPERIENCES,
         education=EDUCATION,
     )
