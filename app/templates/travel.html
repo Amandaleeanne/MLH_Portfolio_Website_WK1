@@ -13,8 +13,8 @@
     <div id="travel-map"></div>
 </section>
 
-{# Leaflet JS loads AFTER the map div — if loaded in <head>, L.map('travel-map')
-   would fail because the div doesn't exist in the DOM yet. Should download local copy of JS script before containerization step #}
+{# Leaflet JS loads AFTER the map div — if loaded in <head>, L.map('travel-map') would fail because the div doesn't exist in the DOM yet. Should download local copy of JS script before containerization step #}
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>

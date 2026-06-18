@@ -1,20 +1,24 @@
-{# reusable list for work, education, hobbies. Handles 3 card types
-automatically based on item fields: 1. Video card — item has youtube_id 2. Image
-card with lightbox — item has image 3. Text-only card — item has neither (work
-experience, education) #} {% macro render_list_section(section_title, items) %}
+{# reusable list for work, education, hobbies. Handles 3 card types automatically based on item fields: 1. Video card — item has youtube_id 2. Image
+card with lightbox — item has image 3. Text-only card — item has neither (work experience, education) #} 
+
+{% macro render_list_section(section_title, items) %}
+
 <section class="list-section">
   <h2>{{ section_title }}</h2>
 
-  {# Check first item to decide which layout to use. hobby-grid for image/video
-  cards, plain list for text-only cards. We peek at items[0] — if it has image
-  or youtube_id, use grid layout #} {% if items and (items[0].image or
-  items[0].youtube_id) %} {# ---- Grid layout for image and video cards ---- #}
+  {# Check first item to decide which layout to use. hobby-grid for image/video cards, plain list for text-only cards. We peek at items[0] — if it has image or youtube_id, use grid layout #} 
+  
+  {% if items and (items[0].image or items[0].youtube_id) %} 
+  
+  {# ---- Grid layout for image and video cards ---- #}
+
   <div class="hobby-grid">
-  {% for item in items %}
-    {% if item.youtube_id %}
-      {# video card #}
-    {% set thumb = "https://img.youtube.com/vi/" + item.youtube_id +
-    "/hqdefault.jpg" %}
+    {% for item in items %} 
+    {% if item.youtube_id %} 
+
+    {# video card #}
+
+    {% set thumb = "https://img.youtube.com/vi/" + item.youtube_id + "/hqdefault.jpg" %}
     <div
       class="hobby-card"
       onclick="openVideoLightbox('{{ item.youtube_id }}', '{{ item.title }}')"
@@ -25,12 +29,15 @@ experience, education) #} {% macro render_list_section(section_title, items) %}
       </div>
       <div class="card-info">
         <h3>{{ item.title }}</h3>
+
         {% if item.description %}
         <p>{{ item.description }}</p>
-        {% endif %} {# GitHub link — only renders if github_url exists in the
-        data. stopPropagation() prevents the card's onclick (video lightbox)
-        from firing when user clicks the GitHub link specifically #} {% if
-        item.github_url %}
+
+        {% endif %} 
+        
+        {# GitHub link — only renders if github_url exists in the data. stopPropagation() prevents the card's onclick (video lightbox) from firing when user clicks the GitHub link specifically #} 
+        
+        {% if item.github_url %}
         <a
           href="{{ item.github_url }}"
           target="_blank"
@@ -44,9 +51,13 @@ experience, education) #} {% macro render_list_section(section_title, items) %}
       </div>
     </div>
 
-    {% elif item.image %} {# ---- Image card with lightbox ---- #} {# {% set %}
-    avoids quote conflicts inside onclick attribute #} {% set img_url =
-    url_for('static', filename=item.image) %}
+    {% elif item.image %} 
+    
+    {# ---- Image card with lightbox ---- #} 
+    
+    {# {% set %} avoids quote conflicts inside onclick attribute #} 
+    
+    {% set img_url = url_for('static', filename=item.image) %}
     <div
       class="hobby-card"
       onclick="openImageLightbox('{{ img_url }}', '{{ item.title }}')"
@@ -54,6 +65,7 @@ experience, education) #} {% macro render_list_section(section_title, items) %}
       <img src="{{ img_url }}" alt="{{ item.title }}" />
       <div class="card-info">
         <h3>{{ item.title }}</h3>
+
         {% if item.subtitle %}
         <p class="subtitle">{{ item.subtitle }}</p>
         {% endif %} {% if item.date %}
@@ -61,6 +73,7 @@ experience, education) #} {% macro render_list_section(section_title, items) %}
         {% endif %} {% if item.description %}
         <p>{{ item.description }}</p>
         {% endif %}
+
       </div>
     </div>
     {% endif %} {% else %}
@@ -68,10 +81,11 @@ experience, education) #} {% macro render_list_section(section_title, items) %}
     {% endfor %}
   </div>
 
-
-  {% else %} {# ---- List layout for text-only cards (work experience,
-  education) ---- #} {# No wrapping grid div — list-item styles handle vertical
-  stacking #} {% for item in items %}
+  {% else %} 
+  {# ---- List layout for text-only cards (work experience, education) ---- #} 
+  {# No wrapping grid div — list-item styles handle vertical stacking #} 
+  
+  {% for item in items %}
   <div class="list-item">
     <div>
       <h3>{{ item.title }}</h3>

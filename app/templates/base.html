@@ -16,13 +16,11 @@
     {# ^ Jinja2 expression: {{ }} renders a Python variable passed from the route #}
     
 
-        {# url_for('static', filename='...') generates the correct absolute path to our static folder.
-          Unlike ./static/... (relative path), url_for() works correctly from ANY route,
-          e.g. /hobbies or /travel won't accidentally look for static files relative to that path #}
+        {# url_for('static', filename='...') generates the correct absolute path to our static folder. Unlike ./static/... (relative path), url_for() works correctly from ANY route, e.g. /hobbies or /travel won't accidentally look for static files relative to that path #}
 
 
-    {# {% block %} is Jinja template inheritance: child templates override this section.
-    {{ title }} is the fallback if a child doesn't define {% block title %} #}
+    {# {% block %} is Jinja template inheritance: child templates override this section. {{ title }} is the fallback if a child doesn't define {% block title %} #}
+    
     <title>{% block title %}{{ title }}{% endblock %}</title>
     {% block head %}{% endblock %}
   </head>
@@ -40,7 +38,7 @@
 
         {# url_for(page.endpoint) generates the URL for a named route function. #}
 
-        {# Jinja inline conditional (like JS ternary): adds 'active' class when the current page matches this nav item.     request.endpoint is Flask's name for the current route function #}
+        {# Jinja inline conditional (like JS ternary): adds 'active' class when the current page matches this nav item.request.endpoint is Flask's name for the current route function #}
 
         <nav>
           {% for page in nav_pages %}
@@ -52,17 +50,14 @@
       </div>
     </header>
 
-  {# Child templates inject their content here. 
-  Without {% block content %}, every page would look identical #}
+  {# Child templates inject their content here. Without {% block content %}, every page would look identical #}
 
     {% block content %}{% endblock %}
 
 
-{# Lightbox lives here so it's available on any page that uses video or image cards.
-   The overlay is hidden by default (display:none in CSS) — no visual impact on 
-   pages that don't use it #}
+{# Lightbox lives here so it's available on any page that uses video or image cards. The overlay is hidden by default (display:none in CSS) — no visual impact on pages that don't use it #}
 
-{# ---- Image lightbox ---- #}
+{# Image lightbox #}
 <div class="lightbox-overlay" id="image-lightbox">
     <div class="lightbox-content">
         <button class="lightbox-close" onclick="closeLightbox('image-lightbox')">✕</button>
@@ -70,9 +65,7 @@
     </div>
 </div>
 
-{# ---- Video lightbox ----
-   iframe src stays empty until user clicks a card —
-   prevents video audio playing in background when lightbox is closed #}
+{# Video lightbox: iframe src stays empty until user clicks a card — prevents video audio playing in background when lightbox is closed #}
 <div class="lightbox-overlay" id="video-lightbox">
     <div class="lightbox-content">
         <button class="lightbox-close" onclick="closeLightbox('video-lightbox')">✕</button>
