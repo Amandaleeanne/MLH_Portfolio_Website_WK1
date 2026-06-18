@@ -6,7 +6,7 @@ import plotly.io as pio
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
 
-from app.portfolio_data import ABOUT_TEXT, EDUCATION, HOBBIES, WORK_EXPERIENCES, PLACES, SKILLS, PERSONAL_PROJECTS
+from app.portfolio_data import EDUCATION, HOBBIES, WORK_EXPERIENCES, PLACES, SKILLS, PERSONAL_PROJECTS
 
 load_dotenv()
 app = Flask(__name__)
@@ -28,7 +28,6 @@ def inject_nav():
 def index():
     # render about.md to HTML for the landing page
     about_path = os.path.join(app.root_path, 'Markdown', 'about.md')
-    about_html = ABOUT_TEXT
     if os.path.exists(about_path):
         with open(about_path, encoding='utf-8') as f:
             about_md = f.read()

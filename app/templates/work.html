@@ -51,7 +51,7 @@
 
     <aside class="experience-timeline">
       <h2>Timeline</h2>
-      <div class="timeline-container">
+      <div class="timeline-container" id="timelineContainer">
         {% for item in education %}
         <div class="timeline-item">
           <div class="timeline-dot"></div>
@@ -76,4 +76,34 @@
     
   </div>
 </main>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById("timelineContainer");
+    if (!container) return;
+    const items = Array.from(container.querySelectorAll(".timeline-item"));
+
+    // Helper function to extract and parse the start date string into a timestamp
+    function getStartTime(item) {
+      const dateText = item.querySelector(".timeline-year").textContent.trim();
+      const startPart = dateText.split(/[-–—]/)[0].trim();
+
+      // Attempt parsing standard "Month Year" or "Year" string formats
+      const parsedDate = new Date(startPart);
+      if (!isNaN(parsedDate.getTime())) {
+        return parsedDate.getTime();
+      }
+
+      // Fallback: If parsing fails, extract the first 4 digit numerical year encountered
+      const yearMatch = startPart.match(/\d{4}/);
+      return yearMatch ? new Date(yearMatch[0]).getTime() : 0;
+    }
+
+    // Sort ascending (Oldest dates first)
+    items.sort((a, b) => getStartTime(a) - getStartTime(b));
+
+    // Clear and append items back into the DOM structure sequentially
+    items.forEach(item => container.appendChild(item));
+  });
+</script>
 {% endblock %}
