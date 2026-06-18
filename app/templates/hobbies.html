@@ -66,7 +66,7 @@ content %}
         }
     }
 
-    // Clicking dark overlay outside content also closes lightbox
+    // Clicking dark overlay outside content also closes lightbox for enlarged image and vid
     document.getElementById('image-lightbox').addEventListener('click', function(e) {
         if (e.target === this) closeLightbox('image-lightbox');
     });
