@@ -6,6 +6,9 @@ from app.portfolio_data import SOCIAL_LINKS, ABOUT_TEXT, TECH_PROJECTS, WEBSITE_
 
 load_dotenv()
 app = Flask(__name__)
+# Note: currently using flat pattern (app created at module level).
+# Should refactor to application factory pattern (create_app() + config.py)
+# in future weeks when we have multiple environments (dev/test/prod) and Docker.
 
 # adds nav links to every template
 @app.context_processor
@@ -24,7 +27,6 @@ def index():
     return render_template(
         'index.html',
         title="Cynthia Lee Wong",
-        url=os.getenv("URL"),
         social_links=SOCIAL_LINKS,
         about_text=ABOUT_TEXT,
         website_url=WEBSITE_URL,
