@@ -11,6 +11,9 @@
     </div>
     <h1>{{ title }}</h1>
     {# All external links use target="_blank" rel="noopener noreferrer" — opens in new tab, prevents new tab accessing this page via window.opener #}
+
+    {# TO DO:  maybe have social links and hero section handling also inside list_section.html - even though not reused? #}
+
     <div class="social-links">
         {% for link in social_links %}
         <a href="{{ link.url }}"
@@ -37,6 +40,8 @@
     </section>
 
     {# Hero video — autoplays silently. mute=1 required by browsers for autoplay to work. loop=1 + playlist= same id = single video loop (YouTube quirk). controls=0 hides player UI. youtube-nocookie.com avoids tracking cookies on autoplay #}
+
+    {# TO DO: consider putting hero data into portfolio_data.py ? #}
 
     <section class="hero-video-section">
         <div class="hero-video-wrapper">

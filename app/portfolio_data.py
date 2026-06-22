@@ -29,7 +29,7 @@ TECH_PROJECTS = [
         "title": "Demo of offline, local AI Chatbot",
         "description": "I architected an experimental offline/local AI branch feature (backend), drove the project's cache-aside strategy, and orchestrated its OS-agnostic ETL pipeline for dynamically seeding the PostgreSQL database.",
         "youtube_id": "fdId_HpPuz8",
-        "github_url": "https://github.com/musemod/Offline_AI_Chatbot",                      # no GitHub link for this one
+        "github_url": "https://github.com/musemod/Offline_AI_Chatbot",                      
     },
 ]
 
@@ -348,5 +348,5 @@ LOCATIONS = [
     },
 
     # add visited locations here
-    # to find coordinates: right-click any spot on Google Maps → first option shows lat, lng
+    # to find coordinates: right-click any spot on Google Maps → shows lat, lng
 ]

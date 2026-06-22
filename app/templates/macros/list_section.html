@@ -68,15 +68,21 @@ card with lightbox — item has image 3. Text-only card — item has neither (wo
 
         {% if item.subtitle %}
         <p class="subtitle">{{ item.subtitle }}</p>
-        {% endif %} {% if item.date %}
+        {% endif %} 
+        
+        {% if item.date %}
         <p class="date">{{ item.date }}</p>
-        {% endif %} {% if item.description %}
+        {% endif %} 
+        
+        {% if item.description %}
         <p>{{ item.description }}</p>
         {% endif %}
 
       </div>
     </div>
-    {% endif %} {% else %}
+    {% endif %} 
+    
+    {% else %}
     <p>No entries yet.</p>
     {% endfor %}
   </div>
@@ -91,15 +97,20 @@ card with lightbox — item has image 3. Text-only card — item has neither (wo
       <h3>{{ item.title }}</h3>
       {% if item.subtitle %}
       <p class="subtitle">{{ item.subtitle }}</p>
-      {% endif %} {% if item.date %}
+      {% endif %} 
+      
+      {% if item.date %}
       <p class="date">{{ item.date }}</p>
-      {% endif %} {% if item.description %}
+      {% endif %} 
+      
+      {% if item.description %}
       <p>{{ item.description }}</p>
       {% endif %}
     </div>
   </div>
   {% else %}
   <p>No entries yet.</p>
-  {% endfor %} {% endif %}
+  {% endfor %} 
+  {% endif %}
 </section>
 {% endmacro %}
