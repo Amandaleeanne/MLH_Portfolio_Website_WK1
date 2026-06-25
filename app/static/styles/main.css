@@ -118,27 +118,28 @@ body {
   padding: 0 24px;
 }
 
-
 /* Social links in profile section */
 .social-links {
-    display: flex;
-    justify-content: center;
-    /* gap: 3px; */
-    margin-top: 10px;
-    padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  /* gap: 3px; */
+  margin-top: 10px;
+  padding-bottom: 10px;
 }
 
 .social-icon {
-    width: 42px;
-    height: 42px;
-    /* invert makes dark SVG icons white to show on the blue profile background */
-    /* filter: invert(1); */
-    transition: transform 0.1s, opacity 0.2s;
+  width: 42px;
+  height: 42px;
+  /* invert makes dark SVG icons white to show on the blue profile background */
+  /* filter: invert(1); */
+  transition:
+    transform 0.1s,
+    opacity 0.2s;
 }
 
 .social-icon:hover {
-    transform: scale(1.2);
-    opacity: 0.85;
+  transform: scale(1.2);
+  opacity: 0.85;
 }
 
 /* list-section applies to ALL sections (work, education, hobbies) */
@@ -194,52 +195,48 @@ body {
   line-height: 1.5;
 }
 
-
 /* Hero video section — centered, 16:9 ratio, max width so it doesn't 
    stretch too wide on large screens */
 .hero-video-section {
-    margin-bottom: 24px;
-    text-align: center;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
 .hero-video-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto 24px;    /* was "0 auto" — added 24px bottom margin */
-    aspect-ratio: 16 / 9;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 24px; /* was "0 auto" — added 24px bottom margin */
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
-
 
 .hero-video-wrapper iframe {
-    position: absolute;      /* fills the aspect-ratio wrapper completely */
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
+  position: absolute; /* fills the aspect-ratio wrapper completely */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
-
 
 /* GitHub link inside video card */
 .github-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    margin-top: 8px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #1d539f;
-    text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1d539f;
+  text-decoration: none;
 }
 
 .github-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
-
-
 
 /* travel page */
 
@@ -258,12 +255,21 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-
-
 /* hobbies page */
 
+.podcast-embed {
+  max-width: 700px;
+  margin: 16px auto 0;
+  padding: 0 24px 24px;
+}
+
+.hobbies p {
+  text-align: center;
+  /* padding: 20px; */
+}
+
 .hobbies h1 {
-  text-align: center; 
+  text-align: center;
   padding: 20px;
 }
 
@@ -379,4 +385,14 @@ body {
   background: none;
   border: none;
   line-height: 1;
+}
+
+.youtube-watch-link {
+  text-align: right;
+  margin-top: 8px;
+}
+
+#youtube-link {
+  color: white;
+  font-size: 14px;
 }

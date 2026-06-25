@@ -15,8 +15,18 @@ SOCIAL_LINKS = [
 
 ]
 
+# about me constants
 ABOUT_TEXT = "Hello! I'm an MLH Fellow passionate about merging tech, visuals, and music."
 WEBSITE_URL = "https://www.cynthialeewong.com"
+
+HERO_DATA = [
+    {
+        "youtube_link_auto": "https://www.youtube-nocookie.com/embed/EiG1VJJ3q8M?autoplay=1&mute=1&loop=1&playlist=EiG1VJJ3q8M&controls=0&rel=0&playsinline=1",
+        "title": "Featured Video",
+        "allow": "autoplay; encrypted-media",
+        "full_screen": "allowfullscreen",
+    }  
+]
 
 TECH_PROJECTS = [
     {
@@ -104,6 +114,11 @@ EDUCATION = [
         "description": "Accelerated 5-year BM-MM program. Exchange program with Columbia University",
     },
 ]
+
+HOBBIES_PODCAST = {
+    "title": "Cynthia Lee Wong: Inviting Audiences in with Visuals and Animation",
+    "src": "https://www.podbean.com/player-v2/?from=embed&i=7ysxf-1af8c5b-pb&share=1&download=1&fonts=Arial&skin=1&font-color=000000&rtl=0&logo_link=episode_page&btn-skin=fb0584&size=150"
+    }
 
 HOBBIES_ART = [
     {

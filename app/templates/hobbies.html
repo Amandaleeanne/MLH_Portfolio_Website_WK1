@@ -2,10 +2,26 @@
 {% from "macros/list_section.html" import render_list_section %} 
 {% block title %}{{ title }}{% endblock %} 
 
-{% block
-content %}
+{% block content %}
+
+{ # kept style line here instead of main.css to keep all embed link info together. embed link source: https://composelikeagirl.podbean.com/e/cynthia-lee-wong-inviting-audiences-in-with-visuals-and-animation/ # }
+
 <section class="hobbies">
     <h1>{{title}}</h1>
+    <p> Check out Cynthia’s interview on Jocelyn Hagen’s Compose Like A Girl podcast! 
+Cynthia discusses her use of visuals with music, collaborating with performers, and AI. </p>
+        <iframe 
+            title="{{ hobbies_podcast.title }}"
+            allowtransparency="true"
+            height="150"
+            width="100%"
+            style="border: none; min-width: min(100%, 430px);height:150px;" 
+            scrolling="no"
+            data-name="pb-iframe-player"
+            src="{{ hobbies_podcast.src }}"
+            loading="lazy">
+        </iframe>
+
 </section>
 <main class="page-content">
 

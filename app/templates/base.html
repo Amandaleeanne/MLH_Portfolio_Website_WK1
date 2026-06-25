@@ -54,67 +54,9 @@
 
     {% block content %}{% endblock %}
 
-{ # TO DO: consider putting lightbox into own file and imported into base.html? # }
-
-{# Lightbox lives here so it's available on any page that uses video or image cards. The overlay is hidden by default (display:none in CSS) — no visual impact on pages that don't use it #}
-
-{# Image lightbox #}
-<div class="lightbox-overlay" id="image-lightbox">
-    <div class="lightbox-content">
-        <button class="lightbox-close" onclick="closeLightbox('image-lightbox')">✕</button>
-        <img id="lightbox-img" src="" alt="">
-    </div>
-</div>
-
-{# Video lightbox: iframe src stays empty until user clicks a card — prevents video audio playing in background when lightbox is closed #}
-<div class="lightbox-overlay" id="video-lightbox">
-    <div class="lightbox-content">
-        <button class="lightbox-close" onclick="closeLightbox('video-lightbox')">✕</button>
-        <iframe id="lightbox-iframe" src="" allowfullscreen></iframe>
-        <div style="text-align:right; margin-top:8px;">
-            {# rel="noopener noreferrer" on YouTube link — same reason as all external links #}
-            <a id="youtube-link" href="" target="_blank" rel="noopener noreferrer"
-               style="color:white; font-size:14px;">
-                ▶ Watch on YouTube
-            </a>
-        </div>
-    </div>
-</div>
-
-<script>
-    function openImageLightbox(src, alt) {
-        document.getElementById('lightbox-img').src = src;
-        document.getElementById('lightbox-img').alt = alt;
-        document.getElementById('image-lightbox').classList.add('active');
-    }
-
-    // ?autoplay=1 starts video on open, ?rel=0 hides YouTube related videos
-    function openVideoLightbox(youtubeId, title) {
-        const embedUrl = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&rel=0';
-        const watchUrl = 'https://www.youtube.com/watch?v=' + youtubeId;
-        document.getElementById('lightbox-iframe').src = embedUrl;
-        document.getElementById('youtube-link').href = watchUrl;
-        document.getElementById('youtube-link').textContent = '▶ Watch "' + title + '" on YouTube';
-        document.getElementById('video-lightbox').classList.add('active');
-    }
-
-    function closeLightbox(id) {
-        document.getElementById(id).classList.remove('active');
-        // Clear iframe src — stops audio continuing after lightbox closes
-        if (id === 'video-lightbox') {
-            document.getElementById('lightbox-iframe').src = '';
-        }
-    }
-
-    // Clicking dark overlay outside content closes lightbox
-    document.getElementById('image-lightbox').addEventListener('click', function(e) {
-        if (e.target === this) closeLightbox('image-lightbox');
-    });
-    document.getElementById('video-lightbox').addEventListener('click', function(e) {
-        if (e.target === this) closeLightbox('video-lightbox');
-    });
-</script>
-
+    {# Lightbox overlays and JS — available on any page that uses image or video cards #}
+    
+    {% include "partials/lightbox.html" %}
 
   </body>
 </html>

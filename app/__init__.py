@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template
 from dotenv import load_dotenv
 
-from app.portfolio_data import SOCIAL_LINKS, ABOUT_TEXT, TECH_PROJECTS, WEBSITE_URL, EDUCATION, HOBBIES_ART, HOBBIES_MUSIC, WORK_EXPERIENCES, LOCATIONS
+from app.portfolio_data import SOCIAL_LINKS, ABOUT_TEXT, HERO_DATA, TECH_PROJECTS, WEBSITE_URL, EDUCATION, HOBBIES_PODCAST, HOBBIES_ART, HOBBIES_MUSIC, WORK_EXPERIENCES, LOCATIONS
 
 load_dotenv()
 app = Flask(__name__)
@@ -29,6 +29,7 @@ def index():
         title="Cynthia Lee Wong",
         social_links=SOCIAL_LINKS,
         about_text=ABOUT_TEXT,
+        hero_data=HERO_DATA,
         website_url=WEBSITE_URL,
         work_experiences=WORK_EXPERIENCES,
         education=EDUCATION,
@@ -37,7 +38,7 @@ def index():
 
 @app.route('/hobbies')
 def hobbies():
-    return render_template('hobbies.html', title="Hobbies", hobbies_art=HOBBIES_ART, hobbies_music=HOBBIES_MUSIC)
+    return render_template('hobbies.html', title="Hobbies", hobbies_podcast=HOBBIES_PODCAST, hobbies_art=HOBBIES_ART, hobbies_music=HOBBIES_MUSIC)
 
 @app.route('/travel')
 def travel():

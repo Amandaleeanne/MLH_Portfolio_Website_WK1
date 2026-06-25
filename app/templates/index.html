@@ -30,7 +30,7 @@
 
 <main class="page-content">
 
-    <section class="about-section">
+    <section class="list-section">
         <h2>About Me</h2>
         <p>{{ about_text }} Check out my
             <a href="{{ website_url }}" target="_blank" rel="noopener noreferrer">
@@ -41,16 +41,16 @@
 
     {# Hero video — autoplays silently. mute=1 required by browsers for autoplay to work. loop=1 + playlist= same id = single video loop (YouTube quirk). controls=0 hides player UI. youtube-nocookie.com avoids tracking cookies on autoplay #}
 
-    {# TO DO: consider putting hero data into portfolio_data.py ? #}
-
     <section class="hero-video-section">
         <div class="hero-video-wrapper">
+            {% for data in hero_data %}
             <iframe
-                src="https://www.youtube-nocookie.com/embed/EiG1VJJ3q8M?autoplay=1&mute=1&loop=1&playlist=EiG1VJJ3q8M&controls=0&rel=0&playsinline=1"
-                title="Featured Video"
-                allow="autoplay; encrypted-media"
+                src="{{ data.youtube_link_auto }}"
+                title="{{ data.title }}"
+                allow="{{ data.allow }}"
                 allowfullscreen>
             </iframe>
+           {% endfor %}
         </div>
     </section>
 
