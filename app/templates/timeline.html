@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Timeline{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/timeline.css') }}">
+{% endblock %}
+
+{% block content %}
+<main class="timeline-page">
+  <section class="timeline-intro">
+    <h1>Timeline</h1>
+    <p>Share a quick update and see it appear in the timeline immediately.</p>
+  </section>
+
+  <section class="timeline-card">
+    <form id="timeline-form" class="timeline-form">
+      <div class="form-grid">
+        <label>
+          Name
+          <input type="text" name="name" required />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required />
+        </label>
+      </div>
+
+      <label>
+        Message
+        <textarea name="content" rows="4" required></textarea>
+      </label>
+
+      <button type="submit">Post to timeline</button>
+      <p id="form-message" class="form-message" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section class="timeline-list">
+    <h2>Recent posts</h2>
+    <div id="timeline-posts">
+      {% for post in timeline_posts %}
+      <article class="timeline-post">
+        <div class="post-meta">
+          <strong>{{ post.name }}</strong>
+          <span>{{ post.created_at }}</span>
+        </div>
+        <p>{{ post.content }}</p>
+      </article>
+      {% else %}
+      <p class="empty-state">No posts yet. Be the first to add one.</p>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+
+<script>
+  const form = document.getElementById('timeline-form');
+  const message = document.getElementById('form-message');
+  const postsContainer = document.getElementById('timeline-posts');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    message.textContent = 'Posting...';
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('{{ url_for("post_timeline_post") }}', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Unable to create post.');
+      }
+
+      const article = document.createElement('article');
+      article.className = 'timeline-post';
+
+      const meta = document.createElement('div');
+      meta.className = 'post-meta';
+
+      const name = document.createElement('strong');
+      name.textContent = data.name;
+
+      const createdAt = document.createElement('span');
+      createdAt.textContent = new Date(data.created_at).toLocaleString();
+
+      meta.appendChild(name);
+      meta.appendChild(createdAt);
+
+      const content = document.createElement('p');
+      content.textContent = data.content;
+
+      article.appendChild(meta);
+      article.appendChild(content);
+      postsContainer.prepend(article);
+
+      form.reset();
+      message.textContent = 'Post created successfully.';
+    } catch (error) {
+      message.textContent = error.message;
+    }
+  });
+</script>
+{% endblock %}
