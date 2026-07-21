@@ -1,4 +1,5 @@
 import os
+import re
 import markdown
 import pandas as pd
 import plotly.express as px
@@ -15,8 +16,20 @@ app = Flask(__name__)
 
 from app.portfolio_data import EDUCATION, HOBBIES, WORK_EXPERIENCES, PLACES, SKILLS, PERSONAL_PROJECTS
 
+# A "does this look like an email" shape: something, an @, something,
+# a dot, something. It won't catch every fake address, but it stops the
+# obviously wrong ones from ever reaching the database.
+EMAIL_PATTERN = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+
 #db
-mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"), user=os.getenv("MYSQL_USER"), password=os.getenv("MYSQL_PASSWORD"), host=os.getenv("MYSQL_HOST"), port=3306)
+# Tests flip TESTING=true so they get a throwaway in-memory database instead
+# of talking to the real MySQL server — nothing written during a test run
+# can ever leak into (or depend on) production data.
+if os.getenv("TESTING") == "true":
+    print("Running in test mode")
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:
+    mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"), user=os.getenv("MYSQL_USER"), password=os.getenv("MYSQL_PASSWORD"), host=os.getenv("MYSQL_HOST"), port=3306)
 #debug
 print(mydb)
 # --- Classes --- 
@@ -39,10 +52,12 @@ def post_timeline_post():
     email = request.form.get('email', '').strip()
     content = request.form.get('content', '').strip()
 
-    if not name or not email or not content:
-        return {
-            "error": "name, email, and content are required"
-        }, 400
+    if not name:
+        return 'Invalid name', 400
+    if not EMAIL_PATTERN.match(email):
+        return 'Invalid email', 400
+    if not content:
+        return 'Invalid content', 400
 
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
     return model_to_dict(timeline_post)
