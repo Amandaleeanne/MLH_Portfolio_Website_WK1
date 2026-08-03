@@ -1,0 +1,38 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - amandaleeanne-Schock-finalSubmission
+  pull_request:
+    branches:
+      - amandaleeanne-Schock-finalSubmission
+
+jobs:
+  run-tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    env:
+      TESTING: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Create virtual environment
+        run: python -m venv python3-virtualenv
+
+      - name: Install dependencies
+        run: |
+          source python3-virtualenv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          source python3-virtualenv/bin/activate
+          bash run_test.sh

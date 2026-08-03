@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Timeline{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/timeline.css') }}">
+{% endblock %}
+
+{% block content %}
+<main class="timeline-page">
+  <section class="timeline-intro">
+    <h1>Timeline Mini-blog</h1>
+    <p>Quick comments about mini things going on in my life or this website!</p>
+  </section>
+
+  <section class="timeline-list">
+    <h2>Recent posts</h2>
+    <div id="timeline-posts">
+      {% for post in timeline_posts %}
+      <article class="timeline-post">
+        <div class="post-meta">
+          <strong>{{ post.name }}</strong>
+          <span>{{ post.created_at }}</span>
+        </div>
+        <p>{{ post.content }}</p>
+      </article>
+      {% else %}
+      <p class="empty-state">No posts yet. Be the first to add one.</p>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+
+{% endblock %}
