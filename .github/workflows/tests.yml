@@ -13,7 +13,7 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: "sqlite:///:memory:"
+      TESTING: true
 
     steps:
       - name: Checkout repository
