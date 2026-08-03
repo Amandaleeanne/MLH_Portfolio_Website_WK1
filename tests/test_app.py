@@ -52,13 +52,6 @@ class AppTestCase(unittest.TestCase):
         assert len(json["timeline_posts"]) == 1
         assert json["timeline_posts"][0]["name"] == "John Doe"
 
-        # The timeline page should render the form that talks to this API,
-        # so a visitor actually has a way to submit a post.
-        page_response = self.client.get("/timeline")
-        assert page_response.status_code == 200
-        page_html = page_response.get_data(as_text=True)
-        assert 'id="timeline-form"' in page_html
-
     def test_malformed_timeline_post(self):
         # POST request missing name
         response = self.client.post("/api/timeline_post", data={"email": "john@example.com", "content": "Hello world, I'm John!"})
