@@ -3,10 +3,10 @@ name: Run Tests
 on:
   push:
     branches:
-      - main
+      - amandaleeanne-Schock-finalSubmission
   pull_request:
     branches:
-      - main
+      - amandaleeanne-Schock-finalSubmission
 
 jobs:
   run-tests:
