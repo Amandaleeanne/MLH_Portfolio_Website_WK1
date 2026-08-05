@@ -33,6 +33,8 @@ jobs:
 
       - name: Redeploy Project
         run: ssh my-vps "/root/build.sh"
+      - name: Clear hanging dockers
+        run: ssh my-vps "docker system prune -f"
 
   notify-success:
     name: Notify Discord (Success)
