@@ -22,7 +22,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Create virtual environment
         run: python -m venv python3-virtualenv
@@ -36,3 +36,50 @@ jobs:
         run: |
           source python3-virtualenv/bin/activate
           bash run_test.sh
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+
+  notify:
+    name: Notify Discord
+    needs: run-tests
+    runs-on: ubuntu-latest
+    if: ${{ failure() }}
+
+    steps:
+      - name: Discord Alert
+        uses: Ilshidur/action-discord@v2
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          args: |
+            ❌ **Tests Failed**
+            Repository: ${{ github.repository }}
+            Workflow: ${{ github.workflow }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+
+            Check the GitHub Actions logs and uploaded test results for details.
+  notify-success:
+    name: Notify Discord (Success)
+    needs: run-tests
+    runs-on: ubuntu-latest
+    if: ${{ success() }}
+
+    steps:
+      - name: Discord Success
+        uses: Ilshidur/action-discord@v2
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          args: |
+            ✅ **Tests Passed**
+            Repository: ${{ github.repository }}
+            Workflow: ${{ github.workflow }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+
+            All tests completed successfully.
