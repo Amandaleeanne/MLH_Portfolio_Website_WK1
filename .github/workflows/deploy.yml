@@ -27,6 +27,7 @@ jobs:
               HostName $SSH_IP
               User $SSH_USER
               IdentityFile ~/.ssh/deploy-key.pem
+              IdentitiesOnly yes
               StrictHostKeyChecking no
           EOF
       - name: Test SSH
