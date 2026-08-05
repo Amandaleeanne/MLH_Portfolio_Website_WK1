@@ -46,9 +46,8 @@ jobs:
             ls -la ~/.ssh
             file ~/.ssh/deploy-key.pem
             ssh-keygen -lf ~/.ssh/deploy-key.pem
-      - name: Debug my-vps config
-        run: |
-          ssh -G my-vps
       - name: Print project root directory
+        env:
+          PROJECT_ROOT: ${{ secrets.PROJECT_ROOT }}
         run: |
-          ssh -vvv my-vps 'pwd'
+          ssh -vvv my-vps "cd \"$PROJECT_ROOT\" && pwd"
