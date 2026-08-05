@@ -12,11 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Verify key
-        run: |
-            ls -la ~/.ssh
-            file ~/.ssh/deploy-key.pem
-            ssh-keygen -lf ~/.ssh/deploy-key.pem
       - name: Configure SSH
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
@@ -34,7 +29,11 @@ jobs:
               IdentityFile ~/.ssh/deploy-key.pem
               StrictHostKeyChecking no
           EOF
-
+      - name: Verify key
+        run: |
+            ls -la ~/.ssh
+            file ~/.ssh/deploy-key.pem
+            ssh-keygen -lf ~/.ssh/deploy-key.pem
       - name: Print project root directory
         run: |
           ssh my-vps 'cd "${{ secrets.PROJECT_ROOT }}" && pwd'
