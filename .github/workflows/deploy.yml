@@ -32,4 +32,4 @@ jobs:
 
       - name: Print project root directory
         run: |
-          ssh my-vps 'cd "${{ secrets.PROJECT_PATH }}" && pwd'
+          ssh my-vps 'cd "${{ secrets.PROJECT_ROOT }}" && pwd'
