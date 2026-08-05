@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Debug key
+        env:
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+            echo "Length: ${#SSH_PRIVATE_KEY}"
+            echo "$SSH_PRIVATE_KEY" | head -2
       - name: Configure SSH
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
@@ -19,8 +25,8 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > ~/.ssh/deploy-key.pem
-          chmod 600 ~/.ssh/deploy-key.pem   
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy-key.pem
+          chmod 600 ~/.ssh/deploy-key.pem
 
           cat >> ~/.ssh/config <<EOF
           Host my-vps
