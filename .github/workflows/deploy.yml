@@ -29,6 +29,17 @@ jobs:
               IdentityFile ~/.ssh/deploy-key.pem
               StrictHostKeyChecking no
           EOF
+      - name: Test SSH
+        env:
+            SSH_USER: ${{ secrets.SSH_USER }}
+            SSH_IP: ${{ secrets.SSH_IP }}
+        run: |
+            ssh -vvv \
+            -i ~/.ssh/deploy-key.pem \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=no \
+            "$SSH_USER@$SSH_IP" \
+            "echo connected"
       - name: Verify key
         run: |
             ls -la ~/.ssh
