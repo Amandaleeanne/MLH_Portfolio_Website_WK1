@@ -32,4 +32,4 @@ jobs:
           EOF
       - name: Print project root directory
         run: |
-          ssh -vvv my-vps "cd \"$PROJECT_ROOT\" && pwd"
+          ssh -i my-vps "cd \"$PROJECT_ROOT\" && pwd"
