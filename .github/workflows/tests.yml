@@ -37,12 +37,6 @@ jobs:
           source python3-virtualenv/bin/activate
           bash run_test.sh
 
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-
   notify-success:
     name: Notify Discord (Success)
     needs: run-tests
