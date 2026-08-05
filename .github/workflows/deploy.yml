@@ -32,46 +32,40 @@ jobs:
           EOF
 
       - name: Redeploy Project
-        run: |
-          ssh my-vps "/root/build.sh"
+        run: ssh my-vps "/root/build.sh"
 
-  notify:
-    name: Notify Discord
-    needs: deploy
-    runs-on: ubuntu-latest
-    if: ${{ failure() }}
-
-    steps:
-      - name: Discord Alert
-        uses: Ilshidur/action-discord@v2
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        with:
-          args: |
-            🚨 **Deployment Failed**
-            Repository: ${{ github.repository }}
-            Workflow: ${{ github.workflow }}
-            Branch: ${{ github.ref_name }}
-            Commit: ${{ github.sha }}
-
-            Check the GitHub Actions logs for more details.
   notify-success:
     name: Notify Discord (Success)
     needs: deploy
-    runs-on: ubuntu-latest
     if: ${{ success() }}
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Discord Success
-        uses: Ilshidur/action-discord@v2
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Send Success Notification
+        uses: sarisia/actions-status-discord@v1
         with:
-          args: |
-            ✅ **Deployment Successful**
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: success
+          title: ✅ Deployment Successful
+          description: |
             Repository: ${{ github.repository }}
-            Workflow: ${{ github.workflow }}
             Branch: ${{ github.ref_name }}
             Commit: ${{ github.sha }}
 
-            Deployment completed successfully.
+  notify-failure:
+    name: Notify Discord (Failure)
+    needs: deploy
+    if: ${{ failure() }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Failure Notification
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: failure
+          title: ❌ Deployment Failed
+          description: |
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
