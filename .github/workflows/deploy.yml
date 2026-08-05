@@ -46,6 +46,11 @@ jobs:
             ls -la ~/.ssh
             file ~/.ssh/deploy-key.pem
             ssh-keygen -lf ~/.ssh/deploy-key.pem
+      - name: Show project root
+        env:
+          PROJECT_ROOT: ${{ secrets.PROJECT_ROOT }}
+        run: |
+          echo "PROJECT_ROOT=$PROJECT_ROOT"
       - name: Inspect home directory
         run: |
           ssh my-vps "pwd && ls -la && find . -maxdepth 2 -type d"
