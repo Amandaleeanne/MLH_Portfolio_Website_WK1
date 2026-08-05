@@ -30,6 +30,6 @@ jobs:
               IdentitiesOnly yes
               StrictHostKeyChecking no
           EOF
-      - name: Print project root directory
+      - name: Redeploy Project
         run: |
-          ssh my-vps "cd \"$PROJECT_ROOT\" && pwd"
+          ssh my-vps "/root/build.sh"
