@@ -51,4 +51,4 @@ jobs:
           ssh -G my-vps
       - name: Print project root directory
         run: |
-          ssh my-vps 'cd "${{ secrets.PROJECT_ROOT }}" && pwd'
+          ssh -vvv my-vps 'pwd'
